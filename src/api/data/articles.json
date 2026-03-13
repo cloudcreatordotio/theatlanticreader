@@ -1,0 +1,393 @@
+[
+  {
+    "id": "article-1",
+    "title": "The Hidden Cost of Infinite Scrolling",
+    "dek": "How the endless feed reshaped our attention spans and what researchers are learning about its long-term effects on cognition.",
+    "url": "https://www.example.com/technology/hidden-cost-infinite-scrolling",
+    "datePublished": "2025-03-10T14:30:00Z",
+    "authors": [
+      { "id": "author-1", "displayName": "Sarah Chen" }
+    ],
+    "thumbnailImage": {
+      "id": "img-1-thumb",
+      "url": "https://picsum.photos/seed/article1/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "A person scrolling on their phone in a dark room"
+    },
+    "heroImage": {
+      "id": "img-1-hero",
+      "url": "https://picsum.photos/seed/article1hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "A person scrolling on their phone in a dark room"
+    },
+    "body": "The first time Aza Raskin saw what he had built, he felt a pang of regret. In 2006, the young interface designer had invented infinite scroll — the feature that lets users swipe down endlessly through content without ever hitting a stopping point. It was elegant. It was addictive. And within a few years, it was everywhere.\n\nToday, infinite scroll is the default interaction pattern on nearly every major social platform, news aggregator, and content feed. Facebook, Twitter, TikTok, Instagram, Reddit — all of them rely on the same fundamental mechanic. The user reaches the bottom of visible content, and more appears. There is no page two. There is no end.\n\nBut a growing body of research suggests that this seamless experience comes at a cognitive cost. Studies from the University of British Columbia have found that continuous scrolling reduces information retention by up to 30 percent compared to paginated content. Participants in the study reported feeling that they had consumed more content than they could recall, describing the experience as 'reading without remembering.'\n\nThe mechanism, researchers believe, is related to how the brain encodes spatial memory. When content is divided into discrete pages, readers form mental landmarks — 'I saw that article on page three' — that aid in later recall. Infinite scroll eliminates these landmarks, creating what cognitive scientists call a 'featureless landscape' of information.\n\nRaskin himself has become one of the most vocal critics of the design pattern he created. In a 2019 interview, he estimated that infinite scroll was responsible for wasting approximately 200,000 human lifetimes per day across all platforms. The number, while rough, illustrates the scale of the problem.",
+    "wordCount": 1847
+  },
+  {
+    "id": "article-2",
+    "title": "What We Get Wrong About Ocean Currents",
+    "dek": "New satellite data is overturning decades of assumptions about how water moves through the deep ocean.",
+    "url": "https://www.example.com/science/ocean-currents-wrong",
+    "datePublished": "2025-03-09T10:00:00Z",
+    "authors": [
+      { "id": "author-2", "displayName": "James Whitfield" },
+      { "id": "author-3", "displayName": "Maria Santos" }
+    ],
+    "thumbnailImage": {
+      "id": "img-2-thumb",
+      "url": "https://picsum.photos/seed/article2/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Satellite view of ocean currents"
+    },
+    "heroImage": {
+      "id": "img-2-hero",
+      "url": "https://picsum.photos/seed/article2hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Satellite view of ocean currents"
+    },
+    "body": "For more than half a century, the textbook model of ocean circulation has looked something like a giant conveyor belt: warm water flows north along the surface, cools near the poles, sinks to the deep ocean, and returns south along the bottom. It is a tidy, elegant model. It is also, according to a growing body of evidence, substantially wrong.\n\nNew data from a constellation of deep-sea sensors and satellite altimeters is revealing a far more chaotic picture. Rather than flowing in smooth, predictable streams, deep ocean currents appear to move in turbulent eddies — spinning vortices of water that can be hundreds of kilometers across and persist for months or even years.\n\nThese eddies, researchers are finding, carry far more energy and move far more heat than the steady background flow. A study published last month in Nature Geoscience estimated that mesoscale eddies transport roughly 40 percent of the ocean's total heat — a figure that would have seemed absurd to oceanographers just a decade ago.\n\nThe implications extend well beyond academic interest. Climate models that rely on the conveyor-belt simplification may be significantly underestimating how quickly heat is being redistributed through the ocean system. This could mean that current projections for regional sea-level rise, marine ecosystem shifts, and coastal weather patterns are based on an incomplete picture.\n\n'We've been trying to predict the ocean with a cartoon,' said Dr. Eleanor Frajka-Williams, a physical oceanographer at the National Oceanography Centre in Southampton. 'The real ocean is far stranger and more dynamic than we imagined.'",
+    "wordCount": 2103
+  },
+  {
+    "id": "article-3",
+    "title": "The Last Booksellers of Buenos Aires",
+    "dek": "In a city where literary culture once defined public life, a handful of independent bookshops fight to survive.",
+    "url": "https://www.example.com/culture/booksellers-buenos-aires",
+    "datePublished": "2025-03-08T08:15:00Z",
+    "authors": [
+      { "id": "author-4", "displayName": "Carolina Vega" }
+    ],
+    "thumbnailImage": {
+      "id": "img-3-thumb",
+      "url": "https://picsum.photos/seed/article3/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Interior of an old bookshop in Buenos Aires"
+    },
+    "heroImage": {
+      "id": "img-3-hero",
+      "url": "https://picsum.photos/seed/article3hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Interior of an old bookshop in Buenos Aires"
+    },
+    "body": "Avenida Corrientes was once the beating heart of Argentine literary life. In the 1960s and '70s, the broad boulevard in central Buenos Aires was lined with dozens of bookshops that stayed open past midnight, their fluorescent lights spilling onto sidewalks crowded with students, writers, and intellectuals browsing the latest translations from Europe.\n\nToday, the avenue tells a different story. Where bookshops once stood, there are now fast-food restaurants, phone-repair kiosks, and vacant storefronts. Of the more than 80 independent booksellers that once operated along a 20-block stretch, fewer than a dozen remain.\n\nHéctor Yánover, 73, has run Librería Norte from the same narrow storefront since 1978. He survived the military dictatorship, two currency collapses, and a pandemic. But the current economic crisis, he says, feels different. 'People still love books,' he told me, arranging a stack of Borges editions in his window display. 'They just can't afford them anymore.'\n\nThe numbers bear him out. Argentina's book industry has contracted by roughly 35 percent since 2019, according to the Argentine Book Chamber. Paper costs have quintupled due to inflation, pushing the price of a new novel to what many workers earn in a day. Independent publishers, who once sustained a vibrant ecosystem of literary fiction and poetry, are closing at a rate of two per month.\n\nAnd yet, something stubborn persists. On a Saturday afternoon, I watched a steady stream of customers file through Yánover's door — not to buy, necessarily, but to browse, to talk, to exist for a few minutes in a space defined by something other than economic anxiety.",
+    "wordCount": 1654
+  },
+  {
+    "id": "article-4",
+    "title": "Why Your Brain Craves Conspiracy Theories",
+    "dek": "The psychological mechanisms behind conspiratorial thinking are more ordinary than you might expect.",
+    "url": "https://www.example.com/science/brain-conspiracy-theories",
+    "datePublished": 1709251200,
+    "authors": [
+      { "id": "author-5", "displayName": "David Park" }
+    ],
+    "thumbnailImage": {
+      "id": "img-4-thumb",
+      "url": "https://picsum.photos/seed/article4/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Abstract illustration of interconnected nodes"
+    },
+    "heroImage": {
+      "id": "img-4-hero",
+      "url": "https://picsum.photos/seed/article4hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Abstract illustration of interconnected nodes"
+    },
+    "body": "In 2014, a team of psychologists at the University of Kent conducted an experiment that would reshape how researchers think about conspiracy theories. They presented participants with two contradictory conspiracy theories about the death of Princess Diana — one claiming she had faked her own death, the other that she had been murdered by British intelligence. Logically, both cannot be true. Yet a surprising number of participants endorsed both.\n\nThe finding suggested something important: belief in conspiracy theories is driven less by the specific claims they make and more by a general orientation toward the world. People who are inclined to see hidden forces at work will see them everywhere, even when the supposed forces contradict each other.\n\nThis insight has led to a revolution in how psychologists study conspiratorial thinking. Rather than debunking individual theories — an approach that research consistently shows is ineffective — scientists are now focused on the underlying cognitive patterns that make conspiracy theories appealing in the first place.\n\nThe primary driver, it turns out, is pattern recognition. The human brain is an extraordinary pattern-detection machine, evolved to find meaningful connections in a chaotic environment. This served our ancestors well: the rustle in the grass that might be a predator, the correlation between certain plants and illness. But in a complex modern world, this same machinery can fire indiscriminately, finding patterns where none exist.\n\nResearchers call this apophenia — the tendency to perceive meaningful connections between unrelated things. Studies have shown that people who score higher on measures of apophenia are significantly more likely to endorse conspiracy theories, regardless of their intelligence or education level.",
+    "wordCount": 1923
+  },
+  {
+    "id": "article-5",
+    "title": "The Architecture of Solitude",
+    "dek": "How Japan's capsule hotels became an unlikely model for rethinking urban housing in an age of isolation.",
+    "url": "https://www.example.com/ideas/architecture-solitude",
+    "datePublished": "2025-03-06T16:45:00Z",
+    "authors": [
+      { "id": "author-6", "displayName": "Yuki Tanaka" },
+      { "id": "author-1", "displayName": "Sarah Chen" }
+    ],
+    "thumbnailImage": {
+      "id": "img-5-thumb",
+      "url": "https://picsum.photos/seed/article5/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Row of capsule hotel pods"
+    },
+    "heroImage": {
+      "id": "img-5-hero",
+      "url": "https://picsum.photos/seed/article5hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Row of capsule hotel pods"
+    },
+    "body": "The Nakagin Capsule Tower was demolished in April 2022. Designed by the architect Kisho Kurokawa and completed in 1972, the building had become one of Tokyo's most photographed landmarks — a stack of 140 prefabricated pods, each just large enough for a single person, plugged into two interconnected concrete towers like washing machines slotted into a wall.\n\nKurokawa envisioned the capsules as interchangeable units that could be swapped out every 25 years, keeping the building perpetually modern. That never happened. Instead, the building aged, its residents moved out, and its capsules became relics — time capsules, quite literally, of a vision for urban living that the world wasn't ready for.\n\nBut as cities around the world grapple with housing shortages, rising rents, and a loneliness epidemic that the World Health Organization has declared a global health threat, some architects and urban planners are looking back at Kurokawa's ideas with fresh eyes.\n\nThe core insight of capsule architecture — that private space can be radically minimized if shared communal space is thoughtfully designed — is finding new expression in co-living developments from Seoul to Stockholm. These projects offer residents small private rooms or pods but invest heavily in shared kitchens, living rooms, workshops, and gardens.\n\nThe results have been promising. A longitudinal study by the Copenhagen Institute for Future Studies found that residents of well-designed co-living spaces reported 40 percent lower rates of loneliness than those in conventional apartments of similar size. They were also more likely to describe their neighbors as friends rather than strangers.",
+    "wordCount": 2287
+  },
+  {
+    "id": "article-6",
+    "title": "The Quiet Revolution in Soil Science",
+    "dek": "Beneath our feet lies an ecosystem as complex as any rainforest. Scientists are only now beginning to understand it.",
+    "url": "https://www.example.com/science/soil-science-revolution",
+    "datePublished": "2025-03-05T11:20:00Z",
+    "authors": [
+      { "id": "author-7", "displayName": "Rachel Morrison" }
+    ],
+    "thumbnailImage": {
+      "id": "img-6-thumb",
+      "url": "https://picsum.photos/seed/article6/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Close-up of rich dark soil"
+    },
+    "heroImage": {
+      "id": "img-6-hero",
+      "url": "https://picsum.photos/seed/article6hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Close-up of rich dark soil with roots visible"
+    },
+    "body": "A single teaspoon of healthy soil contains more microorganisms than there are people on Earth. This fact, repeated so often in environmental writing that it has become almost a cliché, nonetheless captures something genuinely astonishing about the world beneath our feet.\n\nFor most of agricultural history, soil was treated as an inert medium — a place to anchor roots and deliver nutrients. Farmers added fertilizer, tilled the ground, and expected the soil to perform. The microorganisms living in it were, at best, an afterthought.\n\nThat view is now changing with remarkable speed. Advances in DNA sequencing have allowed scientists to catalog the soil microbiome with a precision that would have been unimaginable a decade ago. What they're finding is an ecosystem of staggering complexity — a web of fungi, bacteria, archaea, and viruses that mediates everything from plant nutrition to carbon storage to disease resistance.\n\nThe most dramatic discovery concerns mycorrhizal fungi, which form symbiotic relationships with the roots of roughly 90 percent of all land plants. These fungal networks — sometimes called the 'wood wide web' — can extend for miles underground, connecting individual plants into a shared communication and resource-distribution system.\n\nRecent research from the University of Alberta has shown that trees connected by mycorrhizal networks share not only nutrients but also chemical warning signals about pest attacks. When one tree is infested by bark beetles, its fungal partners transmit defense compounds to neighboring trees before the beetles arrive.",
+    "wordCount": 1756
+  },
+  {
+    "id": "article-7",
+    "title": "How a Small Town in Maine Became America's Asylum Capital",
+    "dek": "Lewiston, Maine, accepted more asylum seekers per capita than any other American city. What happened next surprised everyone.",
+    "url": "https://www.example.com/politics/lewiston-maine-asylum",
+    "datePublished": "2025-03-04T09:00:00Z",
+    "authors": [
+      { "id": "author-13", "displayName": "Elena Ruiz" }
+    ],
+    "thumbnailImage": {
+      "id": "img-7-thumb",
+      "url": "https://picsum.photos/seed/article7/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Street view of Lewiston, Maine"
+    },
+    "heroImage": {
+      "id": "img-7-hero",
+      "url": "https://picsum.photos/seed/article7hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Street view of Lewiston, Maine with diverse pedestrians"
+    },
+    "body": "When the first Somali families arrived in Lewiston, Maine, in 2001, the city was in decline. Its textile mills had closed decades earlier. Its population was shrinking. Its downtown was dotted with empty storefronts and boarded-up triple-decker apartment buildings.\n\nToday, Lewiston is one of the few small cities in New England with a growing population. Its downtown has been revitalized with halal grocery stores, East African restaurants, and a community center that offers English classes and job training. The unemployment rate, once among the highest in Maine, has dropped below the state average.\n\nThe transformation did not happen smoothly. In 2002, then-Mayor Laurier Raymond wrote an open letter asking Somali immigrants to stop coming, saying the city's resources were strained. The letter made national headlines and drew white supremacist groups to the city for a rally. Tensions simmered for years.\n\nBut something shifted. The newcomers opened businesses. Their children enrolled in schools and joined sports teams. A Somali-born woman was elected to the city council. The refugees, it turned out, were not a burden on Lewiston — they were its economic lifeline.\n\nA 2023 study by the Fiscal Policy Institute found that immigrant-owned businesses in Lewiston generated approximately $130 million in annual revenue and employed more than 800 people. The city's housing vacancy rate, once above 15 percent, has dropped to under 3 percent.",
+    "wordCount": 1589
+  },
+  {
+    "id": "article-8",
+    "title": "The Problem with 'Evidence-Based' Everything",
+    "dek": "Our obsession with data-driven decision-making has a blind spot: not everything that matters can be measured.",
+    "url": "https://www.example.com/ideas/evidence-based-problem",
+    "datePublished": "2025-03-03T13:00:00Z",
+    "authors": [
+      { "id": "author-8", "displayName": "Thomas Brennan" }
+    ],
+    "thumbnailImage": {
+      "id": "img-8-thumb",
+      "url": "https://picsum.photos/seed/article8/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Bar charts and graphs on a screen"
+    },
+    "heroImage": {
+      "id": "img-8-hero",
+      "url": "https://picsum.photos/seed/article8hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "A researcher surrounded by data visualizations"
+    },
+    "body": "In the early 2000s, a phrase began migrating from the medical literature into the broader culture: 'evidence-based.' What started as a specific methodological approach to clinical decision-making — physicians should rely on systematic reviews and randomized controlled trials rather than intuition or tradition — has become a universal modifier, applied to everything from education to policing to management to dating.\n\n'Evidence-based policy.' 'Evidence-based parenting.' 'Evidence-based investing.' The implication is always the same: decisions made with data are inherently superior to decisions made without it. Anything that cannot point to a body of supporting evidence is suspect.\n\nThis is, on its face, a reasonable position. But a growing number of scholars are arguing that the evidence-based movement, taken to its logical extreme, is creating problems of its own — not because evidence is bad, but because the framework encourages a particular kind of tunnel vision.\n\nThe core issue is what the sociologist William Bruce Cameron described decades ago: 'Not everything that can be counted counts, and not everything that counts can be counted.' Evidence-based approaches privilege outcomes that are easily measured — test scores, crime rates, revenue figures — and systematically undervalue those that are not: community trust, institutional knowledge, creative serendipity, moral clarity.\n\nIn education, this has led to policies that optimize for standardized test performance while defunding arts programs, recess, and the kind of unstructured learning that research (ironically) suggests is critical for long-term development. In criminal justice, predictive policing algorithms optimize for arrest rates while ignoring the erosion of community trust that makes neighborhoods less safe in the long run.",
+    "wordCount": 2045
+  },
+  {
+    "id": "article-9",
+    "title": "Letter from Lagos: The Rise of Afrobeats Diplomacy",
+    "dek": "Nigeria's music industry is reshaping how the country is perceived abroad — and how it sees itself.",
+    "url": "https://www.example.com/culture/afrobeats-diplomacy-lagos",
+    "datePublished": "2025-03-02T07:30:00Z",
+    "authors": [
+      { "id": "author-9", "displayName": "Adaeze Okonkwo" }
+    ],
+    "thumbnailImage": {
+      "id": "img-9-thumb",
+      "url": "https://picsum.photos/seed/article9/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Lagos nightlife scene with neon lights"
+    },
+    "heroImage": {
+      "id": "img-9-hero",
+      "url": "https://picsum.photos/seed/article9hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Aerial view of Lagos at night"
+    },
+    "body": "On a humid Friday night in Victoria Island, the most exclusive neighborhood in Lagos, a queue stretches around the block outside a club called Quilox. Inside, a DJ is playing the latest single from Rema, and the bass rattles the tinted windows of the Range Rovers idling outside. The cover charge is 50,000 naira — roughly $30, in a country where the minimum wage is about $70 per month.\n\nThis is the Lagos of Afrobeats: wealthy, confident, globally connected, and very young. The average age in Nigeria is 18, and this generation has produced a music industry that is, by some measures, the fastest-growing cultural export in the world.\n\nAfrobeats — the catch-all term for the bass-heavy, rhythm-driven pop music coming out of Lagos, Accra, and London's Nigerian diaspora — has gone from a regional genre to a global phenomenon in less than a decade. Burna Boy has won a Grammy. Wizkid has collaborated with Drake and Beyoncé. Tems has written for Rihanna. The genre now accounts for a measurable share of streaming revenue on every major platform.\n\nBut the impact extends beyond commercial success. Nigerian government officials have begun to speak openly about Afrobeats as a tool of soft power — a way to reshape international perceptions of a country more commonly associated with corruption, conflict, and internet fraud.\n\nIn 2024, the Nigerian Ministry of Arts and Culture created a formal 'Creative Economy Desk' within its diplomatic corps, tasked with leveraging the entertainment industry to strengthen Nigeria's international relationships. It's an explicit acknowledgment that Burna Boy and Wizkid are doing more for Nigeria's global image than decades of traditional diplomacy.",
+    "wordCount": 1834
+  },
+  {
+    "id": "article-10",
+    "title": "The Mathematician Who Sees the Future in Traffic Jams",
+    "dek": "A UCLA professor's radical new model of traffic flow could transform how cities plan their infrastructure.",
+    "url": "https://www.example.com/technology/mathematician-traffic-jams",
+    "datePublished": 1710460800,
+    "authors": [
+      { "id": "author-10", "displayName": "Michael Torres" }
+    ],
+    "thumbnailImage": {
+      "id": "img-10-thumb",
+      "url": "https://picsum.photos/seed/article10/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Aerial view of a traffic jam"
+    },
+    "heroImage": {
+      "id": "img-10-hero",
+      "url": "https://picsum.photos/seed/article10hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Highway traffic pattern seen from above"
+    },
+    "body": "Dr. Yisong Yue doesn't drive. This is not unusual for a professor at a university with a good transit system, but it is ironic for someone who has spent the past seven years developing what may be the most accurate mathematical model of traffic flow ever created.\n\nYue's model, published last fall in the journal Transportation Research Part B, departs from conventional traffic theory in a fundamental way. Traditional models treat cars as particles in a fluid, governed by equations borrowed from physics. Yue treats them as agents in a game, each making decisions based on imperfect information about what other drivers will do.\n\nThe difference matters enormously. Fluid models predict that traffic should flow smoothly up to a critical density, then break down uniformly. But anyone who has sat in traffic knows this isn't what happens. Instead, congestion appears and disappears in waves — phantom traffic jams that seem to materialize from nothing and propagate backward through the flow.\n\nYue's game-theoretic model captures these phantom jams with remarkable fidelity. In simulations, his model reproduces the exact wave patterns observed on real highways, including the characteristic 'stop-and-go' oscillation that has puzzled traffic engineers for decades.\n\nThe practical implications are significant. Most traffic-management systems — ramp meters, variable speed limits, congestion pricing — are designed around fluid models and therefore respond to congestion only after it has already formed. A system based on Yue's model could, in principle, detect the conditions that precede phantom jams and intervene before they materialize.",
+    "wordCount": 2156
+  },
+  {
+    "id": "article-11",
+    "title": "When Diplomats Learn to Code",
+    "dek": "The State Department's experiment with teaching diplomats to program is yielding unexpected results.",
+    "url": "https://www.example.com/politics/diplomats-learn-code",
+    "datePublished": "2025-02-28T10:30:00Z",
+    "authors": [
+      { "id": "author-11", "displayName": "Catherine Walsh" }
+    ],
+    "thumbnailImage": {
+      "id": "img-11-thumb",
+      "url": "https://picsum.photos/seed/article11/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "A laptop showing code in a government office"
+    },
+    "heroImage": {
+      "id": "img-11-hero",
+      "url": "https://picsum.photos/seed/article11hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Modern government office with screens showing data"
+    },
+    "body": "In a windowless room in the Harry S. Truman Building — the State Department's headquarters in Washington — a group of mid-career diplomats is learning to write Python. The instructor, a former NSA analyst turned educator, projects a block of code onto a screen and asks the class to identify the bug.\n\nThis is the Digital Literacy Initiative, a two-year-old program that has quietly become one of the most popular training offerings at State. More than 400 Foreign Service officers have completed the eight-week intensive, and the waiting list currently stretches more than six months.\n\nThe program doesn't aim to turn diplomats into software engineers. Instead, it teaches them enough about data analysis, machine learning, and information systems to be effective interlocutors with the technologists who are increasingly shaping international affairs.\n\n'We kept finding ourselves in meetings where the technical people spoke a language we didn't understand,' said Emily Rodriguez, a career diplomat who completed the program in 2024 and now serves as deputy chief of mission in Tallinn. 'We were making decisions about AI governance, cyber policy, and digital infrastructure without understanding the basics of how any of it worked.'\n\nThe results have been striking. Graduates of the program report feeling significantly more confident in technology-focused negotiations. Several have gone on to lead digital-policy desks at embassies around the world. And the State Department has noticed that posts staffed by DLI graduates produce more nuanced reporting on technology issues.",
+    "wordCount": 1678
+  },
+  {
+    "id": "article-12",
+    "title": "The Second Life of Soviet Bus Stops",
+    "dek": "A photographer's obsessive quest to document the eccentric bus shelters of the former USSR.",
+    "url": "https://www.example.com/culture/soviet-bus-stops",
+    "datePublished": "2025-02-27T14:00:00Z",
+    "authors": [
+      { "id": "author-12", "displayName": "Peter Lindström" }
+    ],
+    "thumbnailImage": {
+      "id": "img-12-thumb",
+      "url": "https://picsum.photos/seed/article12/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Colorful Soviet-era bus stop in a rural setting"
+    },
+    "heroImage": {
+      "id": "img-12-hero",
+      "url": "https://picsum.photos/seed/article12hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Ornate concrete bus shelter in a vast landscape"
+    },
+    "body": "Christopher Herwig was biking from London to St. Petersburg in 2002 when he noticed something strange. Along the roads of Lithuania, Latvia, and Belarus, the bus stops were not the utilitarian glass-and-metal shelters he knew from Western Europe. They were works of art — concrete mosaics depicting heroic workers, swooping modernist canopies, whimsical structures shaped like birds or flowers or, in one memorable case, a giant seashell.\n\nThat chance observation became an eighteen-year project. Herwig has now photographed more than 1,200 bus stops across all fifteen former Soviet republics, from the Baltic states to the Central Asian steppe. His photographs, collected in two books and a traveling exhibition, have become an unlikely cultural phenomenon.\n\nThe bus stops, it turns out, were one of the few areas of Soviet public infrastructure where local architects and artists were given creative freedom. Buildings, bridges, and monuments were dictated by central planning offices in Moscow, but bus shelters — too small and too numerous to attract bureaucratic attention — became canvases for regional expression.\n\nThe result was an extraordinary flowering of vernacular architecture. In Georgia, bus stops incorporated traditional stone-carving techniques. In Kazakhstan, they referenced nomadic tent structures. In Ukraine, some shelters were decorated with mosaics depicting scenes from local folklore. Each one was unique — a tiny act of individuality in a system designed to suppress it.\n\nMany of these structures are now deteriorating. Some have been demolished to make way for modern replacements. Others stand abandoned along roads that buses no longer travel. Herwig estimates that roughly a third of the bus stops he photographed in the early 2000s no longer exist.",
+    "wordCount": 1543
+  },
+  {
+    "id": "article-13",
+    "title": "The Paradox of the Productivity App",
+    "dek": "We've never had more tools for getting things done. So why does everyone feel busier than ever?",
+    "url": "https://www.example.com/technology/productivity-app-paradox",
+    "datePublished": "2025-02-26T09:15:00Z",
+    "authors": null,
+    "thumbnailImage": {
+      "id": "img-13-thumb",
+      "url": "https://picsum.photos/seed/article13/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Phone screen showing multiple productivity apps"
+    },
+    "heroImage": {
+      "id": "img-13-hero",
+      "url": "https://picsum.photos/seed/article13hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Desk covered with devices and productivity tools"
+    },
+    "body": "In 2023, the productivity app market was worth approximately $6.6 billion. By 2028, analysts project it will exceed $13 billion. There are apps for managing your tasks, your calendar, your notes, your habits, your focus, your energy, your sleep, and — inevitably — your other apps.\n\nAnd yet, by nearly every available measure, knowledge workers feel more overwhelmed than ever. A 2024 survey by Microsoft found that 68 percent of workers report not having enough uninterrupted focus time during the workday. The average professional now uses 11 different software applications daily, up from 8 in 2019.\n\nThis is the productivity paradox in miniature: the tools designed to help us manage our work have themselves become work. Each new app introduces its own interface to learn, its own notification system to manage, its own data format to maintain. The overhead of maintaining the productivity system can consume the very time and attention it was supposed to liberate.\n\nCal Newport, the Georgetown computer scientist and author, has a term for this: 'productivity theater.' It describes the phenomenon of spending time organizing, categorizing, and optimizing one's workflow in ways that feel productive but don't actually advance meaningful work. Rearranging your task list is easier than writing the report.\n\nThe problem, Newport argues, is structural rather than individual. Modern knowledge work has no clear definition of productivity — unlike a factory, there's no widget count, no assembly line speed. In the absence of clear metrics, workers substitute visible activity for actual output, and productivity tools facilitate this substitution by providing an endless supply of activities that look like work.",
+    "wordCount": 1892
+  },
+  {
+    "id": "article-14",
+    "title": "The Women Who Map the Ocean Floor",
+    "dek": "Inside the ambitious project to create a complete bathymetric map of Earth's oceans by 2030.",
+    "url": "https://www.example.com/science/women-map-ocean-floor",
+    "datePublished": "2025-02-25T12:00:00Z",
+    "authors": [
+      { "id": "author-3", "displayName": "Maria Santos" },
+      { "id": "author-7", "displayName": "Rachel Morrison" }
+    ],
+    "thumbnailImage": {
+      "id": "img-14-thumb",
+      "url": "https://picsum.photos/seed/article14/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Sonar equipment on a research vessel"
+    },
+    "heroImage": {
+      "id": "img-14-hero",
+      "url": "https://picsum.photos/seed/article14hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "Research vessel at sea with mapping equipment"
+    },
+    "body": "We know more about the surface of Mars than we do about the bottom of our own oceans. This is not a metaphor. The Martian surface has been mapped to a resolution of approximately 20 meters per pixel by orbiting spacecraft. The ocean floor — which covers 71 percent of Earth's surface — has been mapped to a comparable resolution across only about 26 percent of its extent.\n\nThe Seabed 2030 project, launched in 2017 by the Nippon Foundation and the General Bathymetric Chart of the Oceans, aims to change that. Its goal: a complete, high-resolution map of the entire ocean floor by the end of this decade.\n\nIt is, by any measure, one of the most ambitious mapping projects in human history. And it is being led, to a disproportionate degree, by women.\n\nDr. Vicki Ferrini, a marine geologist at Columbia University's Lamont-Doherty Earth Observatory, chairs Seabed 2030's data assembly team. Dr. Helen Snaith leads the project's global data center at the British Oceanographic Data Centre. Dr. Rochelle Wigley directs the project's overall coordination from the University of New Hampshire.\n\n'It wasn't planned that way,' Ferrini told me with a laugh, when I asked about the gender composition of the project's leadership. 'But ocean mapping has always attracted women, going back to Marie Tharp in the 1950s. Maybe it's because the work requires patience and meticulousness more than brute force.'\n\nThe technical challenges are formidable. Sound waves — the only practical tool for mapping the deep ocean — travel slowly through water and disperse over distance. Mapping a single square kilometer of deep ocean floor with modern multibeam sonar takes hours of ship time.",
+    "wordCount": 2234
+  },
+  {
+    "id": "article-15",
+    "title": "What Happens When a Language Dies",
+    "dek": "Every two weeks, a language goes extinct. With it goes an entire way of understanding the world.",
+    "url": "https://www.example.com/ideas/language-death",
+    "datePublished": "2025-02-24T08:45:00Z",
+    "authors": [
+      { "id": "author-4", "displayName": "Carolina Vega" }
+    ],
+    "thumbnailImage": {
+      "id": "img-15-thumb",
+      "url": "https://picsum.photos/seed/article15/200/200",
+      "width": 200,
+      "height": 200,
+      "altText": "Elderly person speaking to a young listener"
+    },
+    "heroImage": {
+      "id": "img-15-hero",
+      "url": "https://picsum.photos/seed/article15hero/800/450",
+      "width": 800,
+      "height": 450,
+      "altText": "A notebook with handwritten linguistic notation"
+    },
+    "body": "In 2010, Boa Sr died on the Andaman Islands in the Bay of Bengal. She was approximately 85 years old, and she was the last fluent speaker of Aka-Bo, a language that had been spoken on the islands for an estimated 65,000 years — making it, by some accounts, one of the oldest linguistic lineages on Earth.\n\nWith her death, Aka-Bo joined the list of more than 500 languages that have gone extinct since 1950. Linguists estimate that of the roughly 7,000 languages currently spoken worldwide, nearly half will fall silent by the end of this century.\n\nThe numbers are staggering, but they understate the loss. A language is not merely a communication system — it is an epistemology, a way of carving reality into categories and relationships. When a language dies, the unique cognitive framework it embodies dies with it.\n\nConsider the Hopi language of the American Southwest, which has no tenses in the European sense. Rather than dividing time into past, present, and future, Hopi grammar distinguishes between events that are 'manifested' (observable, concrete) and those that are 'manifesting' (in the process of becoming real). This is not a quirk of grammar — it reflects a fundamentally different conceptualization of time, one that some physicists have noted bears intriguing similarities to certain interpretations of quantum mechanics.\n\nOr consider Guugu Yimithirr, an Australian Aboriginal language that uses cardinal directions (north, south, east, west) instead of relative directions (left, right, forward, backward) for all spatial reference. Speakers of Guugu Yimithirr maintain a constant, precise awareness of their orientation — a cognitive ability that speakers of relative-direction languages simply do not develop.",
+    "wordCount": 1987
+  }
+]
