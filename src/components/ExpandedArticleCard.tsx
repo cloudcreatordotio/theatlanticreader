@@ -24,7 +24,7 @@ export function ExpandedArticleCard({
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 300,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   };
 
