@@ -43,7 +43,12 @@ export function ArticleDetailScreen({ navigation, route }: Props) {
 
   const [timedOut, setTimedOut] = React.useState(false);
   React.useEffect(() => {
-    if (!fetching || timedOut) {
+    if (!fetching) {
+      // The request settled, so the next one gets its own ten seconds.
+      setTimedOut(false);
+      return;
+    }
+    if (timedOut) {
       return;
     }
     const timer = setTimeout(() => setTimedOut(true), ARTICLE_TIMEOUT_MS);

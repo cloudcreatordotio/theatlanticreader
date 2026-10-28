@@ -184,3 +184,22 @@ test('offers a retry when the article request stalls', () => {
   act(() => jest.advanceTimersByTime(10000));
   expect(screen.getByText(/taking too long/)).toBeTruthy();
 });
+
+test('starts a fresh timeout for each request', () => {
+  mockArticle(undefined);
+  const { rerender } = render(<ArticleDetailScreen {...props} />);
+  act(() => jest.advanceTimersByTime(10000));
+  expect(screen.getByText(/taking too long/)).toBeTruthy();
+
+  // The stalled request finishes on its own after the timeout.
+  mockArticle({});
+  rerender(<ArticleDetailScreen {...props} />);
+  expect(screen.getByText('Body text')).toBeTruthy();
+
+  // A later request is not timed out before it has had its ten seconds.
+  mockArticle(undefined);
+  rerender(<ArticleDetailScreen {...props} />);
+  expect(screen.queryByText(/taking too long/)).toBeNull();
+  act(() => jest.advanceTimersByTime(10000));
+  expect(screen.getByText(/taking too long/)).toBeTruthy();
+});
