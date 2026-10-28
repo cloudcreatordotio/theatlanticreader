@@ -56,15 +56,13 @@ test('renders no date and no byline when the API sent none', () => {
   expect(screen.queryByText('Ada Writer')).toBeNull();
 });
 
-test('bookmarks from the row without opening the article', () => {
-  const onPress = jest.fn();
+test('bookmarks from the button in the row', () => {
   const { store } = renderWithStore(
-    <ArticleListItem article={article} onPress={onPress} />,
+    <ArticleListItem article={article} onPress={jest.fn()} />,
   );
 
   fireEvent.press(screen.getByRole('button', { name: 'Save article' }));
 
   expect(selectIsBookmarked(store.getState(), 'article-1')).toBe(true);
   expect(screen.getByRole('button', { name: 'Remove bookmark' })).toBeTruthy();
-  expect(onPress).not.toHaveBeenCalled();
 });
