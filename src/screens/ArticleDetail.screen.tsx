@@ -22,6 +22,9 @@ import type { Article } from '../graphql/types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetail'>;
 
+// urql has no request timeout, so a stalled request would spin forever.
+const ARTICLE_TIMEOUT_MS = 10000;
+
 // Built outside the screen so the header's render function is not a component
 // defined during render.
 function headerActions(article: Article) {
@@ -37,6 +40,20 @@ export function ArticleDetailScreen({ navigation, route }: Props) {
   const { id } = route.params;
   const [{ article, fetching, error }, reexecuteQuery] = useArticle(id);
   const scrollViewRef = React.useRef<ScrollView>(null);
+
+  const [timedOut, setTimedOut] = React.useState(false);
+  React.useEffect(() => {
+    if (!fetching || timedOut) {
+      return;
+    }
+    const timer = setTimeout(() => setTimedOut(true), ARTICLE_TIMEOUT_MS);
+    return () => clearTimeout(timer);
+  }, [fetching, timedOut]);
+
+  const retry = () => {
+    setTimedOut(false);
+    reexecuteQuery({ requestPolicy: 'network-only' });
+  };
 
   // Track app background/foreground for reading analytics
   const appState = React.useRef(AppState.currentState);
@@ -90,6 +107,15 @@ export function ArticleDetailScreen({ navigation, route }: Props) {
     [id],
   );
 
+  if (fetching && timedOut) {
+    return (
+      <ErrorView
+        message="This article is taking too long to load. Check your connection and try again."
+        onRetry={retry}
+      />
+    );
+  }
+
   if (fetching) {
     return <LoadingView />;
   }
@@ -102,7 +128,7 @@ export function ArticleDetailScreen({ navigation, route }: Props) {
             ? "We couldn't load this article. Check your connection and try again."
             : "This article isn't available. It may have been moved or removed."
         }
-        onRetry={() => reexecuteQuery({ requestPolicy: 'network-only' })}
+        onRetry={retry}
       />
     );
   }

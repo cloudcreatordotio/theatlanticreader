@@ -160,3 +160,27 @@ test('offers a retry when the article is not found', () => {
   fireEvent.press(screen.getByRole('button', { name: 'Try Again' }));
   expect(reexecuteQuery).toHaveBeenCalledTimes(1);
 });
+
+test('offers a retry when the article request stalls', () => {
+  const reexecuteQuery = jest.fn();
+  (useArticle as jest.Mock).mockReturnValue([
+    { article: undefined, fetching: true, error: undefined },
+    reexecuteQuery,
+  ]);
+  render(<ArticleDetailScreen {...props} />);
+
+  act(() => jest.advanceTimersByTime(9999));
+  expect(screen.queryByText(/taking too long/)).toBeNull();
+  act(() => jest.advanceTimersByTime(1));
+  expect(screen.getByText(/taking too long/)).toBeTruthy();
+
+  fireEvent.press(screen.getByRole('button', { name: 'Try Again' }));
+  expect(reexecuteQuery).toHaveBeenCalledWith({
+    requestPolicy: 'network-only',
+  });
+  expect(screen.queryByText(/taking too long/)).toBeNull();
+
+  // The retry gets its own ten seconds.
+  act(() => jest.advanceTimersByTime(10000));
+  expect(screen.getByText(/taking too long/)).toBeTruthy();
+});
