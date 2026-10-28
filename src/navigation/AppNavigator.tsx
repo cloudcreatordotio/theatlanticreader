@@ -63,6 +63,9 @@ export function AppNavigator() {
         component={ArticleDetailScreen}
         options={({ route }) => ({
           headerTitle: route.params.title,
+          // Chevron only: the room goes to the article title, and the label
+          // never depends on whether the article was opened from Bookmarks.
+          headerBackButtonDisplayMode: 'minimal',
         })}
       />
       <Stack.Screen
