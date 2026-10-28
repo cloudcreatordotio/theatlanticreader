@@ -1,9 +1,9 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ArticleFeedScreen} from '../screens/ArticleFeed.screen';
-import {ArticleDetailScreen} from '../screens/ArticleDetail.screen';
-import type {RootStackParamList} from './types';
-import {colors} from '../theme';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ArticleFeedScreen } from '../screens/ArticleFeed.screen';
+import { ArticleDetailScreen } from '../screens/ArticleDetail.screen';
+import type { RootStackParamList } from './types';
+import { colors } from '../theme';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,7 +21,8 @@ export function AppNavigator() {
         headerStyle: {
           backgroundColor: colors.background,
         },
-      }}>
+      }}
+    >
       <Stack.Screen
         name="ArticleFeed"
         component={ArticleFeedScreen}
@@ -37,8 +38,8 @@ export function AppNavigator() {
       <Stack.Screen
         name="ArticleDetail"
         component={ArticleDetailScreen}
-        options={({route}) => ({
-          headerTitle: route.params.id,
+        options={({ route }) => ({
+          headerTitle: route.params.title,
           headerBackTitle: 'Feed',
         })}
       />
