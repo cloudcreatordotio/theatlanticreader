@@ -5,6 +5,8 @@ import { ArticleFeedScreen } from './ArticleFeed.screen';
 import { useLatestArticles } from '../graphql/queries';
 import type { ArticleSummary } from '../graphql/types';
 import { renderWithStore } from '../test-utils';
+import { makeStore } from '../store/store';
+import { feedLoaded, selectSavedFeed } from '../store/feed.slice';
 
 jest.mock('../graphql/queries', () => ({
   useLatestArticles: jest.fn(),
@@ -23,13 +25,14 @@ const article: ArticleSummary = {
 function renderFeed(
   result: object = { articles: [article], fetching: false, error: undefined },
   reexecuteQuery = jest.fn(),
+  store = makeStore(),
 ) {
   (useLatestArticles as jest.Mock).mockReturnValue([result, reexecuteQuery]);
   const props = {
     navigation: { navigate: jest.fn(), setOptions: jest.fn() },
     route: { key: 'ArticleFeed', name: 'ArticleFeed' },
   } as any;
-  return renderWithStore(<ArticleFeedScreen {...props} />);
+  return renderWithStore(<ArticleFeedScreen {...props} />, store);
 }
 
 test('clears the refresh-label interval on unmount', () => {
@@ -64,4 +67,32 @@ test('shows friendly copy and retries when the feed fails to load', () => {
   expect(reexecuteQuery).toHaveBeenCalledWith({
     requestPolicy: 'network-only',
   });
+});
+
+test('saves every feed that loads', () => {
+  const { store } = renderFeed();
+  expect(selectSavedFeed(store.getState())).toEqual([article]);
+});
+
+test('shows the saved feed behind a banner when loading fails', () => {
+  const store = makeStore();
+  store.dispatch(feedLoaded([article]));
+  renderFeed(
+    {
+      articles: undefined,
+      fetching: false,
+      error: new CombinedError({ networkError: new Error('offline') }),
+    },
+    jest.fn(),
+    store,
+  );
+
+  expect(screen.getByText('First article')).toBeTruthy();
+  expect(screen.getByText(/Showing saved articles/)).toBeTruthy();
+  expect(screen.queryByText(/couldn't load/)).toBeNull();
+});
+
+test('shows no banner when the feed loads', () => {
+  renderFeed();
+  expect(screen.queryByText(/Showing saved articles/)).toBeNull();
 });

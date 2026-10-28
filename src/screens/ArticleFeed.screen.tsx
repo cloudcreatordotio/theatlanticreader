@@ -7,6 +7,8 @@ import { ExpandedArticleCard } from '../components/ExpandedArticleCard';
 import { LoadingView } from '../components/LoadingView';
 import { ErrorView } from '../components/ErrorView';
 import type { ArticleSummary } from '../graphql/types';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { feedLoaded, selectSavedFeed } from '../store/feed.slice';
 import { colors, spacing, typography } from '../theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
@@ -15,6 +17,18 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ArticleFeed'>;
 
 export function ArticleFeedScreen({ navigation }: Props) {
   const [{ articles, fetching, error }, reexecuteQuery] = useLatestArticles(10);
+  const dispatch = useAppDispatch();
+  const savedArticles = useAppSelector(selectSavedFeed);
+
+  // urql drops its data when a refetch fails and keeps nothing across
+  // launches, so every good load is saved and shown in place of an error.
+  React.useEffect(() => {
+    if (articles) {
+      dispatch(feedLoaded(articles));
+    }
+  }, [dispatch, articles]);
+  const showingSaved = !articles && savedArticles.length > 0;
+  const visibleArticles = showingSaved ? savedArticles : articles;
 
   const { refreshing, onRefresh: baseOnRefresh } = useRefreshControl({
     fetching,
@@ -77,11 +91,11 @@ export function ArticleFeedScreen({ navigation }: Props) {
     [handleArticlePress],
   );
 
-  if (fetching && !articles) {
+  if (fetching && !visibleArticles) {
     return <LoadingView />;
   }
 
-  if (error && !articles) {
+  if (error && !visibleArticles) {
     return (
       <ErrorView
         message="We couldn't load the latest articles. Check your connection and try again."
@@ -93,13 +107,23 @@ export function ArticleFeedScreen({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={articles}
+        data={visibleArticles}
         keyExtractor={item => item.id}
         renderItem={renderItem}
         ListHeaderComponent={
-          <View style={styles.refreshHeader}>
-            <Text style={styles.refreshLabel}>Updated {refreshLabel}</Text>
-          </View>
+          <>
+            {showingSaved && error ? (
+              <View style={styles.savedBanner}>
+                <Text style={styles.savedBannerText}>
+                  Couldn't refresh. Showing saved articles; pull down to try
+                  again.
+                </Text>
+              </View>
+            ) : null}
+            <View style={styles.refreshHeader}>
+              <Text style={styles.refreshLabel}>Updated {refreshLabel}</Text>
+            </View>
+          </>
         }
         refreshControl={
           <RefreshControl
@@ -117,6 +141,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  savedBanner: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    backgroundColor: colors.text,
+  },
+  savedBannerText: {
+    ...typography.caption,
+    color: colors.white,
   },
   refreshHeader: {
     paddingHorizontal: spacing.md,

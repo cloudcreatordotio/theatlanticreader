@@ -13,20 +13,22 @@ import {
 import appReducer from './app.slice';
 import sessionReducer from './session.slice';
 import bookmarksReducer from './bookmarks.slice';
+import feedReducer from './feed.slice';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  // Only user data is written to disk; the session tokens stay in memory
-  // rather than in plain-text AsyncStorage.
-  whitelist: ['bookmarks'],
+  // Only user data and the offline copy of the feed are written to disk; the
+  // session tokens stay in memory rather than in plain-text AsyncStorage.
+  whitelist: ['bookmarks', 'feed'],
 };
 
 const rootReducer = combineReducers({
   app: appReducer,
   session: sessionReducer,
   bookmarks: bookmarksReducer,
+  feed: feedReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -2,10 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore } from 'redux-persist';
 import { makeStore } from './store';
 import { addBookmark, selectBookmarks } from './bookmarks.slice';
+import { feedLoaded } from './feed.slice';
 
 beforeEach(() => AsyncStorage.clear());
 
-test('persists the bookmarks but not the session tokens', async () => {
+test('persists the bookmarks and the feed but not the session tokens', async () => {
   const store = makeStore();
   persistStore(store);
   // Let the persistor rehydrate (an AsyncStorage read) before dispatching.
@@ -22,11 +23,12 @@ test('persists the bookmarks but not the session tokens', async () => {
       thumbnailImage: null,
     }),
   );
+  store.dispatch(feedLoaded([]));
   // redux-persist writes on a timer.
   await jest.runAllTimersAsync();
 
   const stored = JSON.parse((await AsyncStorage.getItem('persist:root'))!);
-  expect(Object.keys(stored).sort()).toEqual(['_persist', 'bookmarks']);
+  expect(Object.keys(stored).sort()).toEqual(['_persist', 'bookmarks', 'feed']);
   expect(JSON.parse(stored.bookmarks).items[0].id).toBe('article-1');
 });
 
