@@ -9,18 +9,18 @@ import {
   View,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useArticle} from '../graphql/queries';
-import {LoadingView} from '../components/LoadingView';
-import {ErrorView} from '../components/ErrorView';
-import {colors, spacing, typography} from '../theme';
-import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import type {RootStackParamList} from '../navigation/types';
+import { useArticle } from '../graphql/queries';
+import { LoadingView } from '../components/LoadingView';
+import { ErrorView } from '../components/ErrorView';
+import { colors, spacing, typography } from '../theme';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../navigation/types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetail'>;
 
-export function ArticleDetailScreen({route}: Props) {
-  const {id} = route.params;
-  const [{data, fetching, error}, reexecuteQuery] = useArticle(id);
+export function ArticleDetailScreen({ route }: Props) {
+  const { id } = route.params;
+  const [{ data, fetching, error }, reexecuteQuery] = useArticle(id);
   const scrollViewRef = React.useRef<ScrollView>(null);
 
   // Track app background/foreground for reading analytics
@@ -28,11 +28,15 @@ export function ArticleDetailScreen({route}: Props) {
   React.useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       if (appState.current.match(/active/) && nextAppState === 'background') {
-        console.log('[Analytics] User backgrounded while reading:', id);
+        // No analytics client exists yet; report the backgrounding here.
       }
       appState.current = nextAppState;
     };
-    AppState.addEventListener('change', handleAppStateChange);
+    const subscription = AppState.addEventListener(
+      'change',
+      handleAppStateChange,
+    );
+    return () => subscription.remove();
   }, [id]);
 
   // Restore reading position
@@ -40,13 +44,13 @@ export function ArticleDetailScreen({route}: Props) {
     AsyncStorage.getItem(`reading-position-${id}`).then(value => {
       if (value) {
         const position = parseInt(value, 10);
-        scrollViewRef.current?.scrollTo({y: position, animated: false});
+        scrollViewRef.current?.scrollTo({ y: position, animated: false });
       }
     });
   }, [id]);
 
   const handleScroll = React.useCallback(
-    (event: {nativeEvent: {contentOffset: {y: number}}}) => {
+    (event: { nativeEvent: { contentOffset: { y: number } } }) => {
       const y = Math.round(event.nativeEvent.contentOffset.y);
       AsyncStorage.setItem(`reading-position-${id}`, String(y));
     },
@@ -61,7 +65,7 @@ export function ArticleDetailScreen({route}: Props) {
     return (
       <ErrorView
         message={error?.message ?? 'Article not found'}
-        onRetry={() => reexecuteQuery({requestPolicy: 'network-only'})}
+        onRetry={() => reexecuteQuery({ requestPolicy: 'network-only' })}
       />
     );
   }
@@ -84,10 +88,11 @@ export function ArticleDetailScreen({route}: Props) {
       ref={scrollViewRef}
       style={styles.container}
       onScroll={handleScroll}
-      scrollEventThrottle={400}>
+      scrollEventThrottle={400}
+    >
       {article.heroImage && (
         <Image
-          source={{uri: article.heroImage.url}}
+          source={{ uri: article.heroImage.url }}
           style={styles.heroImage}
         />
       )}
