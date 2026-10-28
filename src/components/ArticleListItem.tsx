@@ -1,7 +1,7 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import type {Article} from '../graphql/types';
-import {colors, spacing, typography} from '../theme';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import type { Article } from '../graphql/types';
+import { colors, spacing, typography } from '../theme';
 
 interface ArticleListItemProps {
   article: Article;
@@ -16,12 +16,13 @@ export const ArticleListItem = React.memo(function ArticleListItem({
 
   return (
     <TouchableOpacity
-      style={{...styles.container, opacity: article.thumbnailImage ? 1 : 0.9}}
-      onPress={onPress}>
+      style={[styles.container, !article.thumbnailImage && styles.noThumbnail]}
+      onPress={onPress}
+    >
       <View style={styles.row}>
         {article.thumbnailImage && (
           <Image
-            source={{uri: article.thumbnailImage.url}}
+            source={{ uri: article.thumbnailImage.url }}
             style={styles.thumbnail}
           />
         )}
@@ -54,6 +55,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.border,
     backgroundColor: colors.background,
+  },
+  noThumbnail: {
+    opacity: 0.9,
   },
   row: {
     flexDirection: 'row',
