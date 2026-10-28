@@ -63,7 +63,6 @@ export function AppNavigator() {
         component={ArticleDetailScreen}
         options={({ route }) => ({
           headerTitle: route.params.title,
-          headerBackTitle: 'Feed',
         })}
       />
       <Stack.Screen
