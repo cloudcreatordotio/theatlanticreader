@@ -1,9 +1,11 @@
 module.exports = {
   preset: 'react-native',
   // The preset only transforms react-native itself; these packages resolve to
-  // untranspiled ESM under Jest, so they must go through Babel too.
+  // untranspiled ESM under Jest (react-navigation via lib/module, the safe-area
+  // Jest mock as TSX, the others
+  // through their "react-native" export condition), so Babel must see them.
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?|@react-native-async-storage|@react-navigation|react-redux|@reduxjs/toolkit|immer|nanoid)/)',
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?|@react-navigation|react-native-safe-area-context|react-redux|immer|nanoid)/)',
   ],
   setupFiles: ['<rootDir>/jest.setup.js'],
   // redux-persist's rehydrate timeout and the mock API's latency are real

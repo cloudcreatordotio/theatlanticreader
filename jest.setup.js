@@ -1,4 +1,11 @@
 /* eslint-env jest */
+// SafeAreaProvider renders nothing until native insets arrive, which never
+// happens under Jest; the package ships a mock that supplies them.
+jest.mock(
+  'react-native-safe-area-context',
+  () => require('react-native-safe-area-context/jest/mock').default,
+);
+
 // AsyncStorage v3 no longer ships a Jest mock, so provide a small in-memory one.
 jest.mock('@react-native-async-storage/async-storage', () => {
   let store = {};
