@@ -1,22 +1,22 @@
-import React, {useCallback} from 'react';
-import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
-import {useLatestArticles} from '../graphql/queries';
-import {useRefreshControl} from '../hooks/useRefreshControl';
-import {ArticleListItem} from '../components/ArticleListItem';
-import {ExpandedArticleCard} from '../components/ExpandedArticleCard';
-import {LoadingView} from '../components/LoadingView';
-import {ErrorView} from '../components/ErrorView';
-import type {Article, ArticleEdge} from '../graphql/types';
-import {colors, spacing, typography} from '../theme';
-import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import type {RootStackParamList} from '../navigation/types';
+import React, { useCallback } from 'react';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { useLatestArticles } from '../graphql/queries';
+import { useRefreshControl } from '../hooks/useRefreshControl';
+import { ArticleListItem } from '../components/ArticleListItem';
+import { ExpandedArticleCard } from '../components/ExpandedArticleCard';
+import { LoadingView } from '../components/LoadingView';
+import { ErrorView } from '../components/ErrorView';
+import type { Article, ArticleEdge } from '../graphql/types';
+import { colors, spacing, typography } from '../theme';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../navigation/types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleFeed'>;
 
-export function ArticleFeedScreen({navigation}: Props) {
-  const [{data, fetching, error}, reexecuteQuery] = useLatestArticles(10);
+export function ArticleFeedScreen({ navigation }: Props) {
+  const [{ data, fetching, error }, reexecuteQuery] = useLatestArticles(10);
 
-  const {refreshing, onRefresh: baseOnRefresh} = useRefreshControl({
+  const { refreshing, onRefresh: baseOnRefresh } = useRefreshControl({
     fetching,
     refetch: reexecuteQuery,
   });
@@ -38,6 +38,7 @@ export function ArticleFeedScreen({navigation}: Props) {
         setRefreshLabel(`${Math.floor(seconds / 3600)}h ago`);
       }
     }, 60000);
+    return () => clearInterval(interval);
   }, [lastRefreshed]);
 
   const onRefresh = useCallback(() => {
@@ -61,7 +62,7 @@ export function ArticleFeedScreen({navigation}: Props) {
   );
 
   const renderItem = useCallback(
-    ({item, index}: {item: Article; index: number}) => {
+    ({ item, index }: { item: Article; index: number }) => {
       if (index === 0) {
         return (
           <ExpandedArticleCard
@@ -88,7 +89,7 @@ export function ArticleFeedScreen({navigation}: Props) {
     return (
       <ErrorView
         message={error.message}
-        onRetry={() => reexecuteQuery({requestPolicy: 'network-only'})}
+        onRetry={() => reexecuteQuery({ requestPolicy: 'network-only' })}
       />
     );
   }
