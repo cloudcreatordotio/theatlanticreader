@@ -30,7 +30,8 @@ test('shows ten articles and a real date for each, including epoch-seconds ones'
   ).toBeTruthy();
   // article-4 and article-10 arrive as "1709251200" and "1710460800"; the
   // other rows are 2025 ISO dates (the first article is the card, no date).
-  expect(screen.getAllByText(/^\w+ \d{1,2}, 2024$/)).toHaveLength(2);
+  expect(screen.getByText('March 1, 2024')).toBeTruthy();
+  expect(screen.getByText('March 15, 2024')).toBeTruthy();
   expect(screen.getAllByText(/^\w+ \d{1,2}, 2025$/)).toHaveLength(7);
   expect(screen.queryByText('Invalid Date')).toBeNull();
 });

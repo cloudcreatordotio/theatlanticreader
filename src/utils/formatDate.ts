@@ -1,4 +1,6 @@
-// Formats a parsed datePublished; a missing date renders nothing.
+// Formats a parsed datePublished; a missing date renders nothing. The day is
+// taken in UTC because the API sends date-only values as midnight UTC, which
+// the reader's local zone would shift to the day before.
 export function formatDate(timestamp: number | null): string | null {
   if (timestamp === null) {
     return null;
@@ -7,5 +9,6 @@ export function formatDate(timestamp: number | null): string | null {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: 'UTC',
   });
 }
