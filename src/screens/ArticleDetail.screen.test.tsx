@@ -3,17 +3,18 @@ import { AppState } from 'react-native';
 import { render, screen } from '@testing-library/react-native';
 import { ArticleDetailScreen } from './ArticleDetail.screen';
 import { useArticle } from '../graphql/queries';
+import type { Article } from '../graphql/types';
 
 jest.mock('../graphql/queries', () => ({
   useArticle: jest.fn(),
 }));
 
-const article = {
+const article: Article = {
   id: 'article-1',
   title: 'First article',
   dek: null,
   url: 'https://example.com/1',
-  datePublished: '2024-03-01T12:00:00Z',
+  datePublished: Date.parse('2024-03-01T12:00:00Z'),
   authors: [],
   thumbnailImage: null,
   heroImage: null,
@@ -21,9 +22,13 @@ const article = {
   wordCount: 1200,
 };
 
-function renderDetail() {
+function renderDetail(overrides: Partial<Article> = {}) {
   (useArticle as jest.Mock).mockReturnValue([
-    { data: { article }, fetching: false, error: undefined },
+    {
+      article: { ...article, ...overrides },
+      fetching: false,
+      error: undefined,
+    },
     jest.fn(),
   ]);
   const props = {
@@ -48,4 +53,21 @@ test('removes the app-state listener on unmount', () => {
   unmount();
 
   expect(remove).toHaveBeenCalledTimes(1);
+});
+
+test('renders the date and word count', () => {
+  renderDetail();
+  expect(screen.getByText('March 1, 2024')).toBeTruthy();
+  expect(screen.getByText('1,200 words')).toBeTruthy();
+});
+
+test('renders a zero word count as text instead of crashing', () => {
+  renderDetail({ wordCount: 0 });
+  expect(screen.getByText('0 words')).toBeTruthy();
+});
+
+test('renders no word count or date when the API sent none', () => {
+  renderDetail({ wordCount: null, datePublished: null });
+  expect(screen.getByText('Body text')).toBeTruthy();
+  expect(screen.queryByText(/words|Invalid Date|2024/)).toBeNull();
 });

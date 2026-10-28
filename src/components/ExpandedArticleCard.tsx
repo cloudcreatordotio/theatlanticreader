@@ -1,10 +1,16 @@
 import React from 'react';
-import {Animated, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import type {Article} from '../graphql/types';
-import {colors, spacing, typography} from '../theme';
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import type { ArticleSummary } from '../graphql/types';
+import { colors, spacing, typography } from '../theme';
 
 interface ExpandedArticleCardProps {
-  article: Article;
+  article: ArticleSummary;
   onPress: () => void;
 }
 
@@ -22,16 +28,14 @@ export function ExpandedArticleCard({
     }).start();
   };
 
-  const byline = article.authors
-    ? article.authors.map(a => a.displayName).join(', ')
-    : '';
+  const byline = article.authors.map(a => a.displayName).join(', ');
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       {article.thumbnailImage && (
         <Animated.Image
-          source={{uri: article.thumbnailImage.url}}
-          style={[styles.heroImage, {opacity: fadeAnim}]}
+          source={{ uri: article.thumbnailImage.url }}
+          style={[styles.heroImage, { opacity: fadeAnim }]}
           onLoad={onImageLoad}
         />
       )}

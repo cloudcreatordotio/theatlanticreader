@@ -1,10 +1,11 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import type { Article } from '../graphql/types';
+import type { ArticleSummary } from '../graphql/types';
+import { formatDate } from '../utils/formatDate';
 import { colors, spacing, typography } from '../theme';
 
 interface ArticleListItemProps {
-  article: Article;
+  article: ArticleSummary;
   onPress: () => void;
 }
 
@@ -13,6 +14,7 @@ export const ArticleListItem = React.memo(function ArticleListItem({
   onPress,
 }: ArticleListItemProps) {
   const byline = article.authors.map(a => a.displayName).join(', ');
+  const publishedDate = formatDate(article.datePublished);
 
   return (
     <TouchableOpacity
@@ -33,15 +35,9 @@ export const ArticleListItem = React.memo(function ArticleListItem({
           {byline ? <Text style={styles.byline}>{byline}</Text> : null}
         </View>
       </View>
-      {article.datePublished ? (
+      {publishedDate ? (
         <View style={styles.footer}>
-          <Text style={styles.date}>
-            {new Date(article.datePublished).toLocaleDateString('en-US', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric',
-            })}
-          </Text>
+          <Text style={styles.date}>{publishedDate}</Text>
         </View>
       ) : null}
     </TouchableOpacity>

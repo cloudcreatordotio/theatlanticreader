@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useArticle } from '../graphql/queries';
 import { LoadingView } from '../components/LoadingView';
 import { ErrorView } from '../components/ErrorView';
+import { formatDate } from '../utils/formatDate';
 import { colors, spacing, typography } from '../theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
@@ -20,7 +21,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetail'>;
 
 export function ArticleDetailScreen({ route }: Props) {
   const { id } = route.params;
-  const [{ data, fetching, error }, reexecuteQuery] = useArticle(id);
+  const [{ article, fetching, error }, reexecuteQuery] = useArticle(id);
   const scrollViewRef = React.useRef<ScrollView>(null);
 
   // Track app background/foreground for reading analytics
@@ -61,7 +62,7 @@ export function ArticleDetailScreen({ route }: Props) {
     return <LoadingView />;
   }
 
-  if (error || !data?.article) {
+  if (error || !article) {
     return (
       <ErrorView
         message={error?.message ?? 'Article not found'}
@@ -70,18 +71,8 @@ export function ArticleDetailScreen({ route }: Props) {
     );
   }
 
-  const article = data.article;
-  const byline = article.authors
-    ? article.authors.map(a => a.displayName).join(', ')
-    : '';
-  const publishedDate = new Date(article.datePublished).toLocaleDateString(
-    'en-US',
-    {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    },
-  );
+  const byline = article.authors.map(a => a.displayName).join(', ');
+  const publishedDate = formatDate(article.datePublished);
 
   return (
     <ScrollView
@@ -101,14 +92,16 @@ export function ArticleDetailScreen({ route }: Props) {
         {article.dek && <Text style={styles.dek}>{article.dek}</Text>}
         <View style={styles.meta}>
           {byline ? <Text style={styles.byline}>By {byline}</Text> : null}
-          <Text style={styles.date}>{publishedDate}</Text>
+          {publishedDate ? (
+            <Text style={styles.date}>{publishedDate}</Text>
+          ) : null}
         </View>
         <Text style={styles.body}>{article.body}</Text>
-        {article.wordCount && (
+        {article.wordCount !== null ? (
           <Text style={styles.wordCount}>
             {article.wordCount.toLocaleString()} words
           </Text>
-        )}
+        ) : null}
       </View>
     </ScrollView>
   );

@@ -6,7 +6,7 @@ import { ArticleListItem } from '../components/ArticleListItem';
 import { ExpandedArticleCard } from '../components/ExpandedArticleCard';
 import { LoadingView } from '../components/LoadingView';
 import { ErrorView } from '../components/ErrorView';
-import type { Article, ArticleEdge } from '../graphql/types';
+import type { ArticleSummary } from '../graphql/types';
 import { colors, spacing, typography } from '../theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
@@ -14,7 +14,7 @@ import type { RootStackParamList } from '../navigation/types';
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleFeed'>;
 
 export function ArticleFeedScreen({ navigation }: Props) {
-  const [{ data, fetching, error }, reexecuteQuery] = useLatestArticles(10);
+  const [{ articles, fetching, error }, reexecuteQuery] = useLatestArticles(10);
 
   const { refreshing, onRefresh: baseOnRefresh } = useRefreshControl({
     fetching,
@@ -47,12 +47,8 @@ export function ArticleFeedScreen({ navigation }: Props) {
     baseOnRefresh();
   }, [baseOnRefresh]);
 
-  const articles = data?.latestArticles.edges.map(
-    (edge: ArticleEdge) => edge.node,
-  );
-
   const handleArticlePress = useCallback(
-    (article: Article) => {
+    (article: ArticleSummary) => {
       navigation.navigate('ArticleDetail', {
         id: article.id,
         title: article.title,
@@ -62,7 +58,7 @@ export function ArticleFeedScreen({ navigation }: Props) {
   );
 
   const renderItem = useCallback(
-    ({ item, index }: { item: Article; index: number }) => {
+    ({ item, index }: { item: ArticleSummary; index: number }) => {
       if (index === 0) {
         return (
           <ExpandedArticleCard
