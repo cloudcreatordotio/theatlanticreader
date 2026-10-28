@@ -49,6 +49,8 @@ The removed analytics key is still in git history. A real key in that position s
 
 **Share (Part 2B).** `shareArticle` sends a platform-specific payload: iOS `{title, url, message: title}`; Android `{title, message: "title\nurl"}`, because Android ignores `url`. Cancelling is silent; a rejected promise resolves to `'failed'` (it never throws), and the `ShareButton` in the detail header then shows a short "Could not share" alert (`f06564d`).
 
+On iOS the share sheet's preview (image, headline, domain) comes from the shared page's own Open Graph tags, not from the app; the fixture URLs all point at example.com, which has neither, so the sheet shows a placeholder icon and "example.com". Real article URLs would preview fully with no code change; building the preview in the app (`LPLinkMetadata`) would need a native module or a new dependency.
+
 ## Polish (Part 3)
 
 In the order I ranked them:
