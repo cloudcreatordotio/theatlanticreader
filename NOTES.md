@@ -1,5 +1,10 @@
 # Notes — The Atlantic Reader
 
+**_ Chat logs are located in the docs/chat-logs directory.
+The prompt.md (see docs/prompts/prompt.md) was written between 10:45 and 11:41 -- see git log.
+This take-home was completed over five sessions. Fable 5.1 was used for the planning session. Subsequent sessions used Opus 5.5.
+The AGENTS.md located at docs/AGENTS.md should have been named SESSION.md per its function. The AGENTS.md in the project root is the orthodox AGENTS.md. _**
+
 ## Approach
 
 I worked in short sessions: first an audit that reproduced each defect and made Jest run, then Part 1, Part 2A, Part 2B and polish, each landed, tested and committed before the next one started. Every fix was reproduced first (on the Android emulator, or by a test that failed against the unchanged code) and ships with its test in the same commit. After each session an independent review of the diff looked for regressions; the fixes it prompted are separate commits, so `git log` shows them.
