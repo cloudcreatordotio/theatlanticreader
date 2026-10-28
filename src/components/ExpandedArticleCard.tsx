@@ -21,7 +21,9 @@ export function ExpandedArticleCard({
 }: ExpandedArticleCardProps) {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
 
-  const onImageLoad = () => {
+  // Also run on error: the image box keeps its surface colour, so a failed
+  // image fades in as a placeholder instead of leaving a blank gap.
+  const fadeInImage = () => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 300,
@@ -37,7 +39,8 @@ export function ExpandedArticleCard({
         <Animated.Image
           source={{ uri: article.thumbnailImage.url }}
           style={[styles.heroImage, { opacity: fadeAnim }]}
-          onLoad={onImageLoad}
+          onLoad={fadeInImage}
+          onError={fadeInImage}
         />
       )}
       <View style={styles.content}>
