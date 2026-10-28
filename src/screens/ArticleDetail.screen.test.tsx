@@ -7,6 +7,7 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react-native';
+import { CombinedError } from 'urql';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ArticleDetailScreen } from './ArticleDetail.screen';
 import { useArticle } from '../graphql/queries';
@@ -124,4 +125,38 @@ test('puts share and bookmark buttons in the header once the article has loaded'
   expect(selectBookmarks(store.getState()).map(item => item.id)).toEqual([
     'article-1',
   ]);
+});
+
+test('shows friendly copy and retries when the article fails to load', () => {
+  const reexecuteQuery = jest.fn();
+  (useArticle as jest.Mock).mockReturnValue([
+    {
+      article: undefined,
+      fetching: false,
+      error: new CombinedError({ graphQLErrors: ['Internal Server Error'] }),
+    },
+    reexecuteQuery,
+  ]);
+  render(<ArticleDetailScreen {...props} />);
+
+  expect(screen.getByText(/couldn't load this article/)).toBeTruthy();
+  expect(screen.queryByText(/GraphQL|Internal Server Error/)).toBeNull();
+
+  fireEvent.press(screen.getByRole('button', { name: 'Try Again' }));
+  expect(reexecuteQuery).toHaveBeenCalledWith({
+    requestPolicy: 'network-only',
+  });
+});
+
+test('offers a retry when the article is not found', () => {
+  const reexecuteQuery = jest.fn();
+  (useArticle as jest.Mock).mockReturnValue([
+    { article: null, fetching: false, error: undefined },
+    reexecuteQuery,
+  ]);
+  render(<ArticleDetailScreen {...props} />);
+
+  expect(screen.getByText(/isn't available/)).toBeTruthy();
+  fireEvent.press(screen.getByRole('button', { name: 'Try Again' }));
+  expect(reexecuteQuery).toHaveBeenCalledTimes(1);
 });

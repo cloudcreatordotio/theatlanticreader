@@ -1,5 +1,6 @@
 import React from 'react';
-import { screen } from '@testing-library/react-native';
+import { fireEvent, screen } from '@testing-library/react-native';
+import { CombinedError } from 'urql';
 import { ArticleFeedScreen } from './ArticleFeed.screen';
 import { useLatestArticles } from '../graphql/queries';
 import type { ArticleSummary } from '../graphql/types';
@@ -19,11 +20,11 @@ const article: ArticleSummary = {
   thumbnailImage: null,
 };
 
-function renderFeed() {
-  (useLatestArticles as jest.Mock).mockReturnValue([
-    { articles: [article], fetching: false, error: undefined },
-    jest.fn(),
-  ]);
+function renderFeed(
+  result: object = { articles: [article], fetching: false, error: undefined },
+  reexecuteQuery = jest.fn(),
+) {
+  (useLatestArticles as jest.Mock).mockReturnValue([result, reexecuteQuery]);
   const props = {
     navigation: { navigate: jest.fn(), setOptions: jest.fn() },
     route: { key: 'ArticleFeed', name: 'ArticleFeed' },
@@ -41,4 +42,26 @@ test('clears the refresh-label interval on unmount', () => {
   jest.runOnlyPendingTimers();
 
   expect(jest.getTimerCount()).toBe(0);
+});
+
+test('shows friendly copy and retries when the feed fails to load', () => {
+  const reexecuteQuery = jest.fn();
+  renderFeed(
+    {
+      articles: undefined,
+      fetching: false,
+      error: new CombinedError({
+        graphQLErrors: ['Internal Server Error'],
+      }),
+    },
+    reexecuteQuery,
+  );
+
+  expect(screen.getByText(/couldn't load the latest articles/)).toBeTruthy();
+  expect(screen.queryByText(/GraphQL|Internal Server Error/)).toBeNull();
+
+  fireEvent.press(screen.getByRole('button', { name: 'Try Again' }));
+  expect(reexecuteQuery).toHaveBeenCalledWith({
+    requestPolicy: 'network-only',
+  });
 });

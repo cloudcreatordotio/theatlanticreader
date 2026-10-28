@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {colors, spacing, typography} from '../theme';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, spacing, typography } from '../theme';
 
 interface ErrorViewProps {
   message?: string;
@@ -16,7 +16,11 @@ export function ErrorView({
       <Text style={styles.heading}>Uh oh!</Text>
       <Text style={styles.message}>{message}</Text>
       {onRetry && (
-        <TouchableOpacity style={styles.retryButton} onPress={onRetry}>
+        <TouchableOpacity
+          style={styles.retryButton}
+          onPress={onRetry}
+          accessibilityRole="button"
+        >
           <Text style={styles.retryText}>Try Again</Text>
         </TouchableOpacity>
       )}

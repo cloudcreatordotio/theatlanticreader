@@ -84,7 +84,7 @@ export function ArticleFeedScreen({ navigation }: Props) {
   if (error && !articles) {
     return (
       <ErrorView
-        message={error.message}
+        message="We couldn't load the latest articles. Check your connection and try again."
         onRetry={() => reexecuteQuery({ requestPolicy: 'network-only' })}
       />
     );

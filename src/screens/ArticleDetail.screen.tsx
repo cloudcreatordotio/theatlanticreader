@@ -97,7 +97,11 @@ export function ArticleDetailScreen({ navigation, route }: Props) {
   if (error || !article) {
     return (
       <ErrorView
-        message={error?.message ?? 'Article not found'}
+        message={
+          error
+            ? "We couldn't load this article. Check your connection and try again."
+            : "This article isn't available. It may have been moved or removed."
+        }
         onRetry={() => reexecuteQuery({ requestPolicy: 'network-only' })}
       />
     );
