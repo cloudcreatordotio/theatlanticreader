@@ -1,10 +1,18 @@
 import React from 'react';
 import { AppState, ScrollView } from 'react-native';
-import { act, render, screen, waitFor } from '@testing-library/react-native';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ArticleDetailScreen } from './ArticleDetail.screen';
 import { useArticle } from '../graphql/queries';
 import type { Article } from '../graphql/types';
+import { selectBookmarks } from '../store/bookmarks.slice';
+import { renderWithStore } from '../test-utils';
 
 jest.mock('../graphql/queries', () => ({
   useArticle: jest.fn(),
@@ -48,7 +56,10 @@ function renderDetail(overrides: Partial<Article> = {}) {
   return render(<ArticleDetailScreen {...props} />);
 }
 
-beforeEach(() => AsyncStorage.clear());
+beforeEach(() => {
+  AsyncStorage.clear();
+  props.navigation.setOptions.mockClear();
+});
 afterEach(() => jest.restoreAllMocks());
 
 test('removes the app-state listener on unmount', () => {
@@ -95,4 +106,21 @@ test('restores the reading position once the article has loaded', async () => {
   await waitFor(() =>
     expect(scrollTo).toHaveBeenCalledWith({ y: 640, animated: false }),
   );
+});
+
+test('puts a bookmark toggle in the header once the article has loaded', () => {
+  mockArticle(undefined);
+  const { rerender } = render(<ArticleDetailScreen {...props} />);
+  expect(props.navigation.setOptions).not.toHaveBeenCalled();
+
+  mockArticle({});
+  rerender(<ArticleDetailScreen {...props} />);
+  const { headerRight } = props.navigation.setOptions.mock.lastCall[0];
+  screen.unmount();
+
+  const { store } = renderWithStore(headerRight());
+  fireEvent.press(screen.getByRole('button', { name: 'Save article' }));
+  expect(selectBookmarks(store.getState()).map(item => item.id)).toEqual([
+    'article-1',
+  ]);
 });

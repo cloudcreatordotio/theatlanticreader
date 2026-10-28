@@ -12,14 +12,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useArticle } from '../graphql/queries';
 import { LoadingView } from '../components/LoadingView';
 import { ErrorView } from '../components/ErrorView';
+import { BookmarkButton } from '../components/BookmarkButton';
 import { formatDate } from '../utils/formatDate';
 import { colors, spacing, typography } from '../theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
+import type { Article } from '../graphql/types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetail'>;
 
-export function ArticleDetailScreen({ route }: Props) {
+// Built outside the screen so the header's render function is not a component
+// defined during render.
+function bookmarkHeader(article: Article) {
+  return () => <BookmarkButton article={article} />;
+}
+
+export function ArticleDetailScreen({ navigation, route }: Props) {
   const { id } = route.params;
   const [{ article, fetching, error }, reexecuteQuery] = useArticle(id);
   const scrollViewRef = React.useRef<ScrollView>(null);
@@ -39,6 +47,16 @@ export function ArticleDetailScreen({ route }: Props) {
     );
     return () => subscription.remove();
   }, [id]);
+
+  // The route carries only id and title, so the header's bookmark toggle
+  // waits for the article it saves.
+  React.useEffect(() => {
+    if (article) {
+      navigation.setOptions({
+        headerRight: bookmarkHeader(article),
+      });
+    }
+  }, [navigation, article]);
 
   // Restore reading position once the article, and so the ScrollView, has
   // rendered. A lost position is not worth an error, so storage failures are

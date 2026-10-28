@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { render, screen } from '@testing-library/react-native';
+import { fireEvent, screen } from '@testing-library/react-native';
 import { ArticleListItem } from './ArticleListItem';
 import type { ArticleSummary } from '../graphql/types';
+import { selectIsBookmarked } from '../store/bookmarks.slice';
+import { renderWithStore } from '../test-utils';
 
 const article: ArticleSummary = {
   id: 'article-1',
@@ -25,7 +27,7 @@ function rowOpacity() {
 }
 
 test('renders the row at full opacity when it has a thumbnail', () => {
-  render(<ArticleListItem article={article} onPress={jest.fn()} />);
+  renderWithStore(<ArticleListItem article={article} onPress={jest.fn()} />);
   expect(screen.getByText('First article')).toBeTruthy();
   expect(screen.getByText('Ada Writer')).toBeTruthy();
   expect(screen.getByText('March 1, 2024')).toBeTruthy();
@@ -33,7 +35,7 @@ test('renders the row at full opacity when it has a thumbnail', () => {
 });
 
 test('dims the row slightly when it has no thumbnail', () => {
-  render(
+  renderWithStore(
     <ArticleListItem
       article={{ ...article, thumbnailImage: null }}
       onPress={jest.fn()}
@@ -43,7 +45,7 @@ test('dims the row slightly when it has no thumbnail', () => {
 });
 
 test('renders no date and no byline when the API sent none', () => {
-  render(
+  renderWithStore(
     <ArticleListItem
       article={{ ...article, datePublished: null, authors: [] }}
       onPress={jest.fn()}
@@ -52,4 +54,17 @@ test('renders no date and no byline when the API sent none', () => {
   expect(screen.getByText('First article')).toBeTruthy();
   expect(screen.queryByText(/Invalid Date|2024/)).toBeNull();
   expect(screen.queryByText('Ada Writer')).toBeNull();
+});
+
+test('bookmarks from the row without opening the article', () => {
+  const onPress = jest.fn();
+  const { store } = renderWithStore(
+    <ArticleListItem article={article} onPress={onPress} />,
+  );
+
+  fireEvent.press(screen.getByRole('button', { name: 'Save article' }));
+
+  expect(selectIsBookmarked(store.getState(), 'article-1')).toBe(true);
+  expect(screen.getByRole('button', { name: 'Remove bookmark' })).toBeTruthy();
+  expect(onPress).not.toHaveBeenCalled();
 });

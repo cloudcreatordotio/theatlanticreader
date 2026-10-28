@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import type { ArticleSummary } from '../graphql/types';
 import { formatDate } from '../utils/formatDate';
+import { BookmarkButton } from './BookmarkButton';
 import { colors, spacing, typography } from '../theme';
 
 interface ArticleListItemProps {
@@ -35,11 +36,10 @@ export const ArticleListItem = React.memo(function ArticleListItem({
           {byline ? <Text style={styles.byline}>{byline}</Text> : null}
         </View>
       </View>
-      {publishedDate ? (
-        <View style={styles.footer}>
-          <Text style={styles.date}>{publishedDate}</Text>
-        </View>
-      ) : null}
+      <View style={styles.footer}>
+        <Text style={styles.date}>{publishedDate}</Text>
+        <BookmarkButton article={article} />
+      </View>
     </TouchableOpacity>
   );
 });

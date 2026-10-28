@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react-native';
+import { screen } from '@testing-library/react-native';
 import { ArticleFeedScreen } from './ArticleFeed.screen';
 import { useLatestArticles } from '../graphql/queries';
 import type { ArticleSummary } from '../graphql/types';
+import { renderWithStore } from '../test-utils';
 
 jest.mock('../graphql/queries', () => ({
   useLatestArticles: jest.fn(),
@@ -27,7 +28,7 @@ function renderFeed() {
     navigation: { navigate: jest.fn(), setOptions: jest.fn() },
     route: { key: 'ArticleFeed', name: 'ArticleFeed' },
   } as any;
-  return render(<ArticleFeedScreen {...props} />);
+  return renderWithStore(<ArticleFeedScreen {...props} />);
 }
 
 test('clears the refresh-label interval on unmount', () => {

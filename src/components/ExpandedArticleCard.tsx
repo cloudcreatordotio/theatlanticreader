@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import type { ArticleSummary } from '../graphql/types';
+import { BookmarkButton } from './BookmarkButton';
 import { colors, spacing, typography } from '../theme';
 
 interface ExpandedArticleCardProps {
@@ -47,7 +48,8 @@ export function ExpandedArticleCard({
           </Text>
         )}
         <View style={styles.footer}>
-          {byline ? <Text style={styles.byline}>{byline}</Text> : null}
+          <Text style={styles.byline}>{byline}</Text>
+          <BookmarkButton article={article} />
         </View>
       </View>
     </TouchableOpacity>
