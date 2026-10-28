@@ -49,6 +49,7 @@ function renderDetail(overrides: Partial<Article> = {}) {
 }
 
 beforeEach(() => AsyncStorage.clear());
+afterEach(() => jest.restoreAllMocks());
 
 test('removes the app-state listener on unmount', () => {
   const remove = jest.fn();
