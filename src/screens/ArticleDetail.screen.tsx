@@ -13,6 +13,7 @@ import { useArticle } from '../graphql/queries';
 import { LoadingView } from '../components/LoadingView';
 import { ErrorView } from '../components/ErrorView';
 import { BookmarkButton } from '../components/BookmarkButton';
+import { ShareButton } from '../components/ShareButton';
 import { formatDate } from '../utils/formatDate';
 import { colors, spacing, typography } from '../theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -23,8 +24,13 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ArticleDetail'>;
 
 // Built outside the screen so the header's render function is not a component
 // defined during render.
-function bookmarkHeader(article: Article) {
-  return () => <BookmarkButton article={article} />;
+function headerActions(article: Article) {
+  return () => (
+    <View style={styles.headerActions}>
+      <ShareButton article={article} />
+      <BookmarkButton article={article} />
+    </View>
+  );
 }
 
 export function ArticleDetailScreen({ navigation, route }: Props) {
@@ -48,12 +54,12 @@ export function ArticleDetailScreen({ navigation, route }: Props) {
     return () => subscription.remove();
   }, [id]);
 
-  // The route carries only id and title, so the header's bookmark toggle
-  // waits for the article it saves.
+  // The route carries only id and title, so the header's share and bookmark
+  // buttons wait for the article they act on.
   React.useEffect(() => {
     if (article) {
       navigation.setOptions({
-        headerRight: bookmarkHeader(article),
+        headerRight: headerActions(article),
       });
     }
   }, [navigation, article]);
@@ -134,6 +140,11 @@ export function ArticleDetailScreen({ navigation, route }: Props) {
 }
 
 const styles = StyleSheet.create({
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background,

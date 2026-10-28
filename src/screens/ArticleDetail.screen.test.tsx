@@ -108,7 +108,7 @@ test('restores the reading position once the article has loaded', async () => {
   );
 });
 
-test('puts a bookmark toggle in the header once the article has loaded', () => {
+test('puts share and bookmark buttons in the header once the article has loaded', () => {
   mockArticle(undefined);
   const { rerender } = render(<ArticleDetailScreen {...props} />);
   expect(props.navigation.setOptions).not.toHaveBeenCalled();
@@ -119,6 +119,7 @@ test('puts a bookmark toggle in the header once the article has loaded', () => {
   screen.unmount();
 
   const { store } = renderWithStore(headerRight());
+  expect(screen.getByRole('button', { name: 'Share' })).toBeTruthy();
   fireEvent.press(screen.getByRole('button', { name: 'Save article' }));
   expect(selectBookmarks(store.getState()).map(item => item.id)).toEqual([
     'article-1',
