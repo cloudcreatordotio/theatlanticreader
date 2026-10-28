@@ -8,58 +8,57 @@ import { LoadingView } from '../components/LoadingView';
 import { ErrorView } from '../components/ErrorView';
 import type { ArticleSummary } from '../graphql/types';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { feedLoaded, selectSavedFeed } from '../store/feed.slice';
+import {
+  feedLoaded,
+  selectFeedUpdatedAt,
+  selectSavedFeed,
+} from '../store/feed.slice';
 import { colors, spacing, typography } from '../theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ArticleFeed'>;
 
+function refreshLabelFor(updatedAt: number | null, now: number) {
+  const seconds = updatedAt ? Math.floor((now - updatedAt) / 1000) : 0;
+  if (seconds < 60) {
+    return 'Just now';
+  }
+  if (seconds < 3600) {
+    return `${Math.floor(seconds / 60)}m ago`;
+  }
+  return `${Math.floor(seconds / 3600)}h ago`;
+}
+
 export function ArticleFeedScreen({ navigation }: Props) {
   const [{ articles, fetching, error }, reexecuteQuery] = useLatestArticles(10);
   const dispatch = useAppDispatch();
   const savedArticles = useAppSelector(selectSavedFeed);
+  const updatedAt = useAppSelector(selectFeedUpdatedAt);
 
   // urql drops its data when a refetch fails and keeps nothing across
   // launches, so every good load is saved and shown in place of an error.
   React.useEffect(() => {
     if (articles) {
-      dispatch(feedLoaded(articles));
+      dispatch(feedLoaded({ articles, updatedAt: Date.now() }));
     }
   }, [dispatch, articles]);
   const showingSaved = !articles && savedArticles.length > 0;
   const visibleArticles = showingSaved ? savedArticles : articles;
 
-  const { refreshing, onRefresh: baseOnRefresh } = useRefreshControl({
+  const { refreshing, onRefresh } = useRefreshControl({
     fetching,
     refetch: reexecuteQuery,
   });
 
-  // Track when feed was last refreshed
-  const [lastRefreshed, setLastRefreshed] = React.useState<Date>(new Date());
-  const [refreshLabel, setRefreshLabel] = React.useState('Just now');
-
+  // The label counts from the last successful load, so it stays honest when
+  // a refresh fails and the saved feed is showing. `now` ticks every minute.
+  const [now, setNow] = React.useState(() => Date.now());
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      const seconds = Math.floor(
-        (new Date().getTime() - lastRefreshed.getTime()) / 1000,
-      );
-      if (seconds < 60) {
-        setRefreshLabel('Just now');
-      } else if (seconds < 3600) {
-        setRefreshLabel(`${Math.floor(seconds / 60)}m ago`);
-      } else {
-        setRefreshLabel(`${Math.floor(seconds / 3600)}h ago`);
-      }
-    }, 60000);
+    const interval = setInterval(() => setNow(Date.now()), 60000);
     return () => clearInterval(interval);
-  }, [lastRefreshed]);
-
-  const onRefresh = useCallback(() => {
-    setLastRefreshed(new Date());
-    setRefreshLabel('Just now');
-    baseOnRefresh();
-  }, [baseOnRefresh]);
+  }, []);
+  const refreshLabel = refreshLabelFor(updatedAt, now);
 
   const handleArticlePress = useCallback(
     (article: ArticleSummary) => {

@@ -1,4 +1,8 @@
-import reducer, { feedLoaded, selectSavedFeed } from './feed.slice';
+import reducer, {
+  feedLoaded,
+  selectFeedUpdatedAt,
+  selectSavedFeed,
+} from './feed.slice';
 import type { ArticleSummary } from '../graphql/types';
 
 function summary(id: string): ArticleSummary {
@@ -13,11 +17,19 @@ function summary(id: string): ArticleSummary {
   };
 }
 
-test('starts empty and keeps only the latest feed', () => {
+test('starts empty and keeps only the latest feed with its time', () => {
   let state = reducer(undefined, { type: 'init' });
   expect(selectSavedFeed({ feed: state })).toEqual([]);
+  expect(selectFeedUpdatedAt({ feed: state })).toBeNull();
 
-  state = reducer(state, feedLoaded([summary('a'), summary('b')]));
-  state = reducer(state, feedLoaded([summary('c')]));
+  state = reducer(
+    state,
+    feedLoaded({ articles: [summary('a'), summary('b')], updatedAt: 1 }),
+  );
+  state = reducer(
+    state,
+    feedLoaded({ articles: [summary('c')], updatedAt: 2 }),
+  );
   expect(selectSavedFeed({ feed: state }).map(item => item.id)).toEqual(['c']);
+  expect(selectFeedUpdatedAt({ feed: state })).toBe(2);
 });

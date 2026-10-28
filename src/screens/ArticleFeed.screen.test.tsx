@@ -72,11 +72,14 @@ test('shows friendly copy and retries when the feed fails to load', () => {
 test('saves every feed that loads', () => {
   const { store } = renderFeed();
   expect(selectSavedFeed(store.getState())).toEqual([article]);
+  expect(screen.getByText('Updated Just now')).toBeTruthy();
 });
 
 test('shows the saved feed behind a banner when loading fails', () => {
   const store = makeStore();
-  store.dispatch(feedLoaded([article]));
+  store.dispatch(
+    feedLoaded({ articles: [article], updatedAt: Date.now() - 2 * 3600000 }),
+  );
   renderFeed(
     {
       articles: undefined,
@@ -89,6 +92,7 @@ test('shows the saved feed behind a banner when loading fails', () => {
 
   expect(screen.getByText('First article')).toBeTruthy();
   expect(screen.getByText(/Showing saved articles/)).toBeTruthy();
+  expect(screen.getByText('Updated 2h ago')).toBeTruthy();
   expect(screen.queryByText(/couldn't load/)).toBeNull();
 });
 
