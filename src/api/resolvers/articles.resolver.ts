@@ -1,28 +1,28 @@
-import {GraphQLError} from 'graphql';
+import { GraphQLError } from 'graphql';
 import articlesData from '../data/articles.json';
-import {apiConfig} from '../config';
+import { apiConfig } from '../config';
 
 const simulateLatency = (): Promise<void> =>
   new Promise(resolve => setTimeout(() => resolve(), apiConfig.latencyMs));
 
 export const articleResolvers = {
   Query: {
-    latestArticles: async (_: unknown, args: {first: number}) => {
+    latestArticles: async (_: unknown, args: { first: number }) => {
       await simulateLatency();
 
       if (apiConfig.simulateServerError) {
         throw new GraphQLError('Internal Server Error', {
-          extensions: {code: 'INTERNAL_SERVER_ERROR'},
+          extensions: { code: 'INTERNAL_SERVER_ERROR' },
         });
       }
 
-      const articles = articlesData.slice(0, args.first - 1);
+      const articles = articlesData.slice(0, args.first);
       return {
-        edges: articles.map(article => ({node: article})),
+        edges: articles.map(article => ({ node: article })),
       };
     },
 
-    article: async (_: unknown, args: {id: string}) => {
+    article: async (_: unknown, args: { id: string }) => {
       await simulateLatency();
 
       if (apiConfig.simulateTimeout) {
