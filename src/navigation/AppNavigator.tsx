@@ -1,11 +1,33 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import {
+  createNativeStackNavigator,
+  type NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 import { ArticleFeedScreen } from '../screens/ArticleFeed.screen';
 import { ArticleDetailScreen } from '../screens/ArticleDetail.screen';
+import { BookmarksScreen } from '../screens/Bookmarks.screen';
 import type { RootStackParamList } from './types';
-import { colors } from '../theme';
+import { colors, spacing } from '../theme';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function BookmarksHeaderButton() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  return (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('BookmarkedArticles')}
+      hitSlop={spacing.sm}
+      accessibilityRole="button"
+    >
+      <Text style={styles.headerButton}>Bookmarks</Text>
+    </TouchableOpacity>
+  );
+}
+
+const renderBookmarksHeaderButton = () => <BookmarksHeaderButton />;
 
 export function AppNavigator() {
   return (
@@ -33,6 +55,7 @@ export function AppNavigator() {
             fontWeight: '700',
             fontSize: 18,
           },
+          headerRight: renderBookmarksHeaderButton,
         }}
       />
       <Stack.Screen
@@ -43,6 +66,18 @@ export function AppNavigator() {
           headerBackTitle: 'Feed',
         })}
       />
+      <Stack.Screen
+        name="BookmarkedArticles"
+        component={BookmarksScreen}
+        options={{ title: 'Bookmarks', headerBackTitle: 'Feed' }}
+      />
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  headerButton: {
+    fontSize: 16,
+    color: colors.accent,
+  },
+});

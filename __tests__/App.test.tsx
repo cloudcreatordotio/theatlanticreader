@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 import App from '../App';
 
 test('renders the feed from the mock API', async () => {
@@ -34,4 +34,10 @@ test('shows ten articles and a real date for each, including epoch-seconds ones'
   expect(screen.getByText('March 15, 2024')).toBeTruthy();
   expect(screen.getAllByText(/^\w+ \d{1,2}, 2025$/)).toHaveLength(7);
   expect(screen.queryByText('Invalid Date')).toBeNull();
+});
+
+test('opens the empty bookmarks screen from the feed header', async () => {
+  render(<App />);
+  fireEvent.press(await screen.findByRole('button', { name: 'Bookmarks' }));
+  expect(await screen.findByText('No bookmarks yet')).toBeTruthy();
 });
