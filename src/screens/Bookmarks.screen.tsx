@@ -40,7 +40,7 @@ export function BookmarksScreen({ navigation }: Props) {
     return (
       <EmptyState
         title="No bookmarks yet"
-        message="Tap ☆ on any article to save it here."
+        message="Tap the star on any article to save it here."
       />
     );
   }
