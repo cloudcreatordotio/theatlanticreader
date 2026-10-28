@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppState } from 'react-native';
-import { render, screen } from '@testing-library/react-native';
+import { AppState, ScrollView } from 'react-native';
+import { act, render, screen, waitFor } from '@testing-library/react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ArticleDetailScreen } from './ArticleDetail.screen';
 import { useArticle } from '../graphql/queries';
 import type { Article } from '../graphql/types';
@@ -22,25 +23,32 @@ const article: Article = {
   wordCount: 1200,
 };
 
-function renderDetail(overrides: Partial<Article> = {}) {
+const props = {
+  navigation: { navigate: jest.fn(), setOptions: jest.fn() },
+  route: {
+    key: 'ArticleDetail',
+    name: 'ArticleDetail',
+    params: { id: article.id, title: article.title },
+  },
+} as any;
+
+function mockArticle(result: Partial<Article> | undefined) {
   (useArticle as jest.Mock).mockReturnValue([
     {
-      article: { ...article, ...overrides },
-      fetching: false,
+      article: result && { ...article, ...result },
+      fetching: !result,
       error: undefined,
     },
     jest.fn(),
   ]);
-  const props = {
-    navigation: { navigate: jest.fn(), setOptions: jest.fn() },
-    route: {
-      key: 'ArticleDetail',
-      name: 'ArticleDetail',
-      params: { id: article.id, title: article.title },
-    },
-  } as any;
+}
+
+function renderDetail(overrides: Partial<Article> = {}) {
+  mockArticle(overrides);
   return render(<ArticleDetailScreen {...props} />);
 }
+
+beforeEach(() => AsyncStorage.clear());
 
 test('removes the app-state listener on unmount', () => {
   const remove = jest.fn();
@@ -70,4 +78,20 @@ test('renders no word count or date when the API sent none', () => {
   renderDetail({ wordCount: null, datePublished: null });
   expect(screen.getByText('Body text')).toBeTruthy();
   expect(screen.queryByText(/words|Invalid Date|2024/)).toBeNull();
+});
+
+test('restores the reading position once the article has loaded', async () => {
+  const scrollTo = jest.spyOn(ScrollView.prototype, 'scrollTo');
+  await AsyncStorage.setItem('reading-position-article-1', '640');
+
+  mockArticle(undefined);
+  const { rerender } = render(<ArticleDetailScreen {...props} />);
+  // Storage answers while the loading view is still up, as on a device.
+  await act(async () => {});
+  mockArticle({});
+  rerender(<ArticleDetailScreen {...props} />);
+
+  await waitFor(() =>
+    expect(scrollTo).toHaveBeenCalledWith({ y: 640, animated: false }),
+  );
 });

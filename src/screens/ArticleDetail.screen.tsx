@@ -40,20 +40,28 @@ export function ArticleDetailScreen({ route }: Props) {
     return () => subscription.remove();
   }, [id]);
 
-  // Restore reading position
+  // Restore reading position once the article, and so the ScrollView, has
+  // rendered. A lost position is not worth an error, so storage failures are
+  // ignored here and when saving.
+  const loadedId = article?.id;
   React.useEffect(() => {
-    AsyncStorage.getItem(`reading-position-${id}`).then(value => {
-      if (value) {
-        const position = parseInt(value, 10);
-        scrollViewRef.current?.scrollTo({ y: position, animated: false });
-      }
-    });
-  }, [id]);
+    if (!loadedId) {
+      return;
+    }
+    AsyncStorage.getItem(`reading-position-${loadedId}`)
+      .then(value => {
+        if (value) {
+          const position = parseInt(value, 10);
+          scrollViewRef.current?.scrollTo({ y: position, animated: false });
+        }
+      })
+      .catch(() => {});
+  }, [loadedId]);
 
   const handleScroll = React.useCallback(
     (event: { nativeEvent: { contentOffset: { y: number } } }) => {
       const y = Math.round(event.nativeEvent.contentOffset.y);
-      AsyncStorage.setItem(`reading-position-${id}`, String(y));
+      AsyncStorage.setItem(`reading-position-${id}`, String(y)).catch(() => {});
     },
     [id],
   );
