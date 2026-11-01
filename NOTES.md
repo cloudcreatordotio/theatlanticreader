@@ -1,9 +1,10 @@
 # Notes — The Atlantic Reader
 
-**_ Chat logs are located in the docs/chat-logs directory.
+** Chat logs are located in the docs/chat-logs directory.
 The prompt.md (see docs/prompts/prompt.md) was written between 10:45 and 11:41 -- see git log.
 This take-home was completed over five sessions. Fable 5.1 was used for the planning session. Subsequent sessions used Opus 5.5.
-The AGENTS.md located at docs/AGENTS.md should have been named SESSION.md per its function. The AGENTS.md in the project root is the orthodox AGENTS.md. _**
+The AGENTS.md located at docs/AGENTS.md should have been named SESSION.md per its function.
+The AGENTS.md in the project root is the orthodox AGENTS.md. **
 
 ## Approach
 
